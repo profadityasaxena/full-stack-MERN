@@ -1,14 +1,20 @@
+/* -----------------------------------------------------------------
+   Tailwind v4 core (kept for @theme inline & future plugins)
+------------------------------------------------------------------ */
 @import "tailwindcss";
 
+/* -----------------------------------------------------------------
+   1.  Design Tokens
+------------------------------------------------------------------ */
 :root {
-  /* Brand Colors */
+  /* Brand */
   --primary:   #006d77;
   --secondary: #83c5be;
   --surface:   #edf6f9;
   --highlight: #ffddd2;
   --warning:   #e29578;
 
-  /* Adigrey Palette */
+  /* Adigrey (10-step) */
   --adigrey-0:   #ffffff;
   --adigrey-100: #f5f5f5;
   --adigrey-200: #e5e5e5;
@@ -19,23 +25,31 @@
   --adigrey-700: #404040;
   --adigrey-800: #262626;
   --adigrey-900: #171717;
-  --black:      #000000;
 
-  /* Defaults for theme */
+  --black: #000000;
+
+  /* Defaults */
   --background: var(--adigrey-0);
   --foreground: var(--adigrey-900);
+
+  /* Font fallbacks */
+  --font-sans: var(--font-geist-sans, system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
 }
 
+/* -----------------------------------------------------------------
+   2.  Tailwind CSS-first @theme inline (exposes tokens to utilities)
+------------------------------------------------------------------ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary:    var(--primary);
+  --color-secondary:  var(--secondary);
+  --color-surface:    var(--surface);
+  --color-highlight:  var(--highlight);
+  --color-warning:    var(--warning);
 
-  --color-primary:   var(--primary);
-  --color-secondary: var(--secondary);
-  --color-surface:   var(--surface);
-  --color-highlight: var(--highlight);
-  --color-warning:   var(--warning);
-
+  /* Grey scale */
   --color-adigrey-0:   var(--adigrey-0);
   --color-adigrey-100: var(--adigrey-100);
   --color-adigrey-200: var(--adigrey-200);
@@ -47,17 +61,16 @@
   --color-adigrey-800: var(--adigrey-800);
   --color-adigrey-900: var(--adigrey-900);
   --color-black:       var(--black);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
+/* -----------------------------------------------------------------
+   3.  Dark-Mode Overrides
+------------------------------------------------------------------ */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
 
-    /* Optional dark variants */
     --adigrey-0:   #0a0a0a;
     --adigrey-100: #1a1a1a;
     --adigrey-200: #262626;
@@ -71,32 +84,103 @@
   }
 }
 
+/* -----------------------------------------------------------------
+   4.  Base Reset
+------------------------------------------------------------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.font-sans-custom {
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-.font-mono-custom {
-  font-family: var(--font-mono);
-}
+/* -----------------------------------------------------------------
+   5.  Token Helper Utilities (optional)
+------------------------------------------------------------------ */
+.font-sans-custom { font-family: var(--font-sans); }
+.font-mono-custom { font-family: var(--font-mono); }
 
-.bg-primary {
+.text-primary { color: var(--primary); }
+.bg-primary   { background-color: var(--primary); }
+
+.text-secondary { color: var(--secondary); }
+.bg-surface     { background-color: var(--surface); }
+
+/* -----------------------------------------------------------------
+   6.  Navigation (Responsive, Class-Based)
+------------------------------------------------------------------ */
+.navbar {
   background-color: var(--primary);
+  color: #fff;
+  width: 100%;
+  height: 3.5rem;              /* 56 px */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 
-.text-primary {
-  color: var(--primary);
+.navbar-title {
+  font-weight: 600;
+  font-size: 1.125rem;         /* 18 px */
 }
 
-.bg-surface {
-  background-color: var(--surface);
+/* Desktop link row */
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
-.text-secondary {
-  color: var(--secondary);
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar-link:hover { text-decoration: underline; }
+
+/* Hamburger button wrapper */
+.navbar-mobile {
+  display: none;               /* hidden on desktop */
+}
+
+.navbar-mobile button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile dropdown (hidden by default) */
+.mobile-menu {
+  display: none;
+  background-color: var(--primary);
+  padding: 0 1rem 1rem;
+}
+
+.mobile-menu a {
+  display: block;
+  color: #fff;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mobile-menu a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------
+   Responsive Rules
+--------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .navbar-links { display: none; }  /* hide desktop links */
+  .navbar-mobile { display: block; }/* show hamburger */
+
+  /* Show dropdown when nav[data-open="true"] */
+  nav[data-open="true"] .mobile-menu { display: block; }
 }
