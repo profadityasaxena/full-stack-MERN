@@ -1,13 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --primary:   #006d77;
+  --secondary: #83c5be;
+  --surface:   #edf6f9;
+  --highlight: #ffddd2;
+  --warning:   #e29578;
+
+  /* Adigrey Palette */
+  --adigrey-0:   #ffffff;
+  --adigrey-100: #f5f5f5;
+  --adigrey-200: #e5e5e5;
+  --adigrey-300: #d4d4d4;
+  --adigrey-400: #a3a3a3;
+  --adigrey-500: #737373;
+  --adigrey-600: #525252;
+  --adigrey-700: #404040;
+  --adigrey-800: #262626;
+  --adigrey-900: #171717;
+  --black:      #000000;
+
+  /* Defaults for theme */
+  --background: var(--adigrey-0);
+  --foreground: var(--adigrey-900);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary:   var(--primary);
+  --color-secondary: var(--secondary);
+  --color-surface:   var(--surface);
+  --color-highlight: var(--highlight);
+  --color-warning:   var(--warning);
+
+  --color-adigrey-0:   var(--adigrey-0);
+  --color-adigrey-100: var(--adigrey-100);
+  --color-adigrey-200: var(--adigrey-200);
+  --color-adigrey-300: var(--adigrey-300);
+  --color-adigrey-400: var(--adigrey-400);
+  --color-adigrey-500: var(--adigrey-500);
+  --color-adigrey-600: var(--adigrey-600);
+  --color-adigrey-700: var(--adigrey-700);
+  --color-adigrey-800: var(--adigrey-800);
+  --color-adigrey-900: var(--adigrey-900);
+  --color-black:       var(--black);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -16,6 +56,18 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Optional dark variants */
+    --adigrey-0:   #0a0a0a;
+    --adigrey-100: #1a1a1a;
+    --adigrey-200: #262626;
+    --adigrey-300: #333333;
+    --adigrey-400: #404040;
+    --adigrey-500: #525252;
+    --adigrey-600: #737373;
+    --adigrey-700: #a3a3a3;
+    --adigrey-800: #d4d4d4;
+    --adigrey-900: #f5f5f5;
   }
 }
 
@@ -23,4 +75,28 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-sans-custom {
+  font-family: var(--font-sans);
+}
+
+.font-mono-custom {
+  font-family: var(--font-mono);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.text-secondary {
+  color: var(--secondary);
 }

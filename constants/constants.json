@@ -1,0 +1,6 @@
+[
+  { "label": "Home",      "href": "/" },
+  { "label": "Profile",   "href": "/profile" },
+  { "label": "Messages",  "href": "/messages" },
+  { "label": "Settings",  "href": "/settings" }
+]
